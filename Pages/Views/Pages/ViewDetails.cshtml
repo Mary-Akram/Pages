@@ -1,0 +1,66 @@
+﻿@model Pages.DTOs.PagesDto.PageDetailsDto
+
+@{
+    ViewData["Title"] = "ViewDetails";
+}
+
+
+<div>
+    <h4>Page Details</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+          Page Name:
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt class = "col-sm-2">
+           Description:
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.Raw(Model.Description)
+        </dd>
+    </dl>
+</div>
+<div>
+
+    <p>
+        <a asp-area="" asp-controller="Section" asp-action="CreateNewSection" class="btn btn-primary">Create New Section</a>
+    </p>
+    <div>
+    <table class="table mt-4">
+        <thead>
+            <tr>
+                <th>
+                   Section Name
+                </th>
+                <th>
+                    Description
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Sections)
+            {
+                <tr>
+                    <td>
+                        @item.Name
+                    </td>
+                    <td>
+                        @Html.Raw(item.Description)
+                    </td>
+                    <td>
+                        <a asp-controller="Section" asp-action="ViewSection" asp-route-id="@item.Id" class="btn btn-success">Details</a> |
+                        <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    </div>
+</div>
+<div>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    <a asp-action="Index">Back to List</a>
+</div>

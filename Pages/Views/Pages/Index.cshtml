@@ -1,0 +1,39 @@
+﻿@model IEnumerable<Pages.DTOs.Pages.PagesDto>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Pages </h1>
+
+<p>
+    <a asp-area="" asp-controller="Pages" asp-action="CreateNewPage" class="btn btn-primary">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+              Page Name
+            </th>
+            <th>
+              Created Date  
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td> @item.Name
+                </td>
+                <td>
+                    @item.CreatedDate
+                </td>
+                <td>
+                    <a asp-controller="Pages" asp-action="ViewDetails" asp-route-id="@item.Id" class="btn btn-success">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

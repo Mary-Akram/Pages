@@ -1,0 +1,49 @@
+﻿@model Pages.DTOs.Pages.AddPagesDto
+
+@{
+    ViewData["Title"] = "CreateNewPage";
+}
+
+<script src="https://cdn.tiny.cloud/1/xzw9uf115zrip968vgpxohqs3q3it8m08wykhjg95m90l5er/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+
+<h1>Create</h1>
+<form method="post" enctype="multipart/form-data" asp-action="SavePage" asp-controller="Pages" style="border: 1px solid #ccc; padding: 20px; background-color: #f9f9f9;">
+    <div class="form-group mt-4 col-md-4">
+        <label asp-for="PageName" class="control-label">English Title</label>
+        <input asp-for="PageName" class="form-control" style="border: 1px solid #ddd; padding: 8px;" />
+        <span asp-validation-for="PageName" class="text-danger"></span>
+    </div>
+
+    <!-- English Description -->
+    <div class="form-group mt-4">
+        <label asp-for="Description" class="control-label">English Description</label>
+        <textarea asp-for="Description" class="form-control" id="DescriptionTextArea" rows="4" style="border: 1px solid #ddd; padding: 8px;"></textarea>
+        <span asp-validation-for="Description" class="text-danger"></span>
+    </div>
+
+    <div class="form-group mt-4">
+        <input type="submit" value="Create" class="btn btn-primary" />
+    </div>
+</form>
+
+<div style="padding: 10px;">
+    <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+</div>
+
+
+<script>
+    tinymce.init({
+        selector: '#DescriptionTextArea',
+        height: 300,
+        plugins: 'advlist autolink lists link image charmap print preview anchor',
+        toolbar: 'undo redo | formatselect | bold italic backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | link image',
+    });
+</script>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+
+
