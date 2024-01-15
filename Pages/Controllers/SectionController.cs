@@ -23,12 +23,12 @@ namespace Pages.Controllers
             try
             {
                 TempData["Secid"] = id;
-                var Result = await service.GetSectionById(id);
-
+                var Result =await service.GetSectionById(id);
                 return View(Result);
+
             }catch(Exception ex)
             {
-                return null;
+                return View("_CustomError");
             }
         }
         public IActionResult CreateNewSection()
@@ -46,10 +46,11 @@ namespace Pages.Controllers
             }
             catch(Exception ex)
             {
-                return null;
+                return View("_CustomError");
+
 
             }
-            
+
         }
 
         [HttpPost]
@@ -60,11 +61,18 @@ namespace Pages.Controllers
                 int? secid = TempData["Secid"] as int?;
                 int? id = TempData["id"] as int?;
                 var Result = await service.EditSection(sectionDto, secid);
+                if(Result == 0)
+                {
+                    return View("_CustomError");
+
+
+                }
                 return RedirectToAction("ViewDetails", "Pages", new { id = id });
             }
             catch (Exception ex)
             {
-                return null;
+                return View("_CustomError");
+
 
             }
 

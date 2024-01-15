@@ -3,7 +3,7 @@
 <script src="https://cdn.tiny.cloud/1/xzw9uf115zrip968vgpxohqs3q3it8m08wykhjg95m90l5er/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
 
 
-<h1>Create</h1>
+<h1>Edit</h1>
 <form method="post" enctype="multipart/form-data" asp-action="UpdateSection" asp-controller="Section" style="border: 1px solid #ccc; padding: 20px; background-color: #f9f9f9;">
     <div class="form-group mt-4 col-md-4">
         <label asp-for="@Model.EnglishTitle" class="control-label">English Title</label>
@@ -31,7 +31,11 @@
         <textarea asp-for="@Model.ArabicDescription" class="form-control" id="arabicDescriptionTextArea" rows="4" style="border: 1px solid #ddd; padding: 8px;"></textarea>
         <span asp-validation-for="@Model.ArabicDescription" class="text-danger"></span>
     </div>
-
+     <div class="form-group">
+        <label asp-for="@Model.InputDate"></label>
+        <input asp-for="@Model.InputDate" class=" form-control" type="datetime-local" />
+        <span asp-validation-for="@Model.InputDate" class="text-danger"></span>
+        </div>
     <!-- Image upload -->
     <div class="form-group mt-4">
         <label asp-for="Images" class="form-label">Upload your Image</label>
