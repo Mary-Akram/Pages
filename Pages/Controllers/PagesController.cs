@@ -55,5 +55,22 @@ namespace Pages.Controllers
                 return null;
             }
         }
+
+        public async Task<ActionResult> DeletePage(int id)
+        {
+            try
+            {
+                var Value=await service.DeletePage(id);
+                 var allPages = await service.GetPages();
+                    return RedirectToAction("Index");
+
+            }
+            catch (Exception ex)
+            {
+                return View("_CustomError");
+
+
+            }
+        }
     }
 }

@@ -61,6 +61,33 @@ namespace Pages.Services.Implementation
         }
 
 
+        public async Task<int> DeleteSection(int Id)
+        {
+            var SectionDetails = context.Sections
+       .Include(x => x.Files.Where(f => f.SectionId == Id))
+       .FirstOrDefault(x => x.Id == Id);
+            if(SectionDetails == null)
+            {
+                return 0;
+            }
+            foreach (var file in SectionDetails.Files)
+            {
+                var DeleteImageResult = await Images.DeleteImage(file.Path);
+                if (DeleteImageResult)
+                {
+                    continue;
+
+                }
+                else
+                {
+                    return 0;
+                }
+            }
+           context.Sections.Remove(SectionDetails);
+            context.SaveChanges();
+            return 1;
+
+        }
 
         public async Task<int> EditSection(EditSectionDto sectionDto,int? Id)
         {

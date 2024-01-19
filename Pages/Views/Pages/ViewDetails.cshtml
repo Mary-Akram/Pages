@@ -52,7 +52,7 @@
                     </td>
                     <td>
                         <a asp-controller="Section" asp-action="ViewSection" asp-route-id="@item.Id" class="btn btn-success">Details</a> |
-                        <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">Delete</a>
+                            <a asp-action="DeleteSection" asp-controller="Section" asp-route-id="@item.Id" class="btn btn-danger">Delete</a>
                     </td>
                 </tr>
             }

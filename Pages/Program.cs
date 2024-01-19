@@ -17,7 +17,12 @@ builder.Services.AddDbContext<PagesUDDbContext>(options =>
 builder.Services.AddScoped<IPagesService, PagesService>();
 builder.Services.AddScoped<ISectionService,SectionService>();
 
+
 var app = builder.Build();
+var env = builder.Environment;
+Images.Initialize(env);
+
+
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

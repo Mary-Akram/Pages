@@ -77,5 +77,21 @@ namespace Pages.Controllers
             }
 
         }
+        
+        public async Task<ActionResult> DeleteSection(int id)
+        {
+            try
+            {
+                int? Pageid = TempData["id"] as int?;
+                await service.DeleteSection(id);
+                return RedirectToAction("ViewDetails", "Pages", new { id = Pageid });
+            }
+            catch (Exception ex)
+            {
+                return View("_CustomError");
+
+
+            }
+        }
     }
 }
